@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palmon Survivel - Colored Text Generator</title>
+	<link rel="icon" type="image/x-icon" href="/icon.ico">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #dce2f2;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 600px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        
+        .author {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 500;
+            /* Removed margin-bottom */
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 80px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .color-set-group {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .color-set-group legend {
+            font-weight: bold;
+            padding: 0 10px;
+        }
+        
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .color-option {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .color-option input {
+            margin-right: 5px;
+        }
+        
+        .color-label {
+            font-family: 'Consolas', monospace;
+            font-weight: bold;
+        }
+        
+        button {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-right: 10px;
+        }
+        
+        button:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .display-panel {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            min-height: 150px;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #fcfcfe;
+            margin-top: 20px;
+            font-family: 'Consolas', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.5;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        
+        .char-span {
+            display: inline-block;
+        }
+        
+        .space-char {
+            display: inline-block;
+            min-width: 8px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .notification.show {
+            opacity: 1;
+        }
+        
+        .custom-colors-controls {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+        }
+        
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .custom-colors-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .color-swatch {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .color-swatch:hover::after {
+            content: '×';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Palmon Survivel <br/> Colored Text Generator</h1>
+        <div class="author">by Heineman</div>
+        
+        <div class="form-group">
+            <label for="textInput">Enter your text:</label>
+            <textarea id="textInput" placeholder="Type your text here... (Supports multiple lines)"></textarea>
+        </div>
+        
+        <fieldset class="color-set-group">
+            <legend>Color Sets</legend>
+            <div class="color-options">
+                <div class="color-option">
+                    <input type="radio" id="radioRainbow" name="colorSet" value="Rainbow" checked>
+                    <label for="radioRainbow" class="color-label" id="labelRainbow">Rainbow</label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="radioBlues" name="colorSet" value="Blues">
+                    <label for="radioBlues" class="color-label" id="labelBlues">Blues</label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="radioGreens" name="colorSet" value="Greens">
+                    <label for="radioGreens" class="color-label" id="labelGreens">Greens</label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="radioReds" name="colorSet" value="Reds">
+                    <label for="radioReds" class="color-label" id="labelReds">Reds</label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="radioPurples" name="colorSet" value="Purples">
+                    <label for="radioPurples" class="color-label" id="labelPurples">Purples</label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="radioOranges" name="colorSet" value="Oranges">
+                    <label for="radioOranges" class="color-label" id="labelOranges">Oranges</label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="radioBluePurple" name="colorSet" value="BluePurple">
+                    <label for="radioBluePurple" class="color-label" id="labelBluePurple">Blue/Purple</label>
+                </div>
+                <div class="color-option">
+                    <input type="radio" id="radioCustom" name="colorSet" value="Custom">
+                    <label for="radioCustom" class="color-label" id="labelCustom">Custom</label>
+                </div>
+            </div>
+            
+            <div class="custom-colors-controls" id="customColorsControls" style="display: none;">
+                <div class="color-picker-container">
+                    <input type="color" id="colorPicker" value="#ff0000">
+                    <button id="addColorBtn">Add Color</button>
+                    <button id="clearColorsBtn">Clear All</button>
+                </div>
+                <div class="custom-colors-list" id="customColorsList"></div>
+            </div>
+        </fieldset>
+        
+        <button id="copyButton">Copy to clipboard</button>
+        
+        <div class="display-panel" id="displayPanel"></div>
+    </div>
+    
+    <div class="notification" id="notification">Copied to clipboard!</div>
+
+    <script>
+        // Color set definitions
+        const colorSets = {
+            "Rainbow": [
+                "#FF0000", // Red
+                "#FFA500", // Orange
+                "#FFFF00", // Yellow
+                "#008000", // Green
+                "#0000FF", // Blue
+                "#4B0082", // Indigo
+                "#EE82EE"  // Violet
+            ],
+            "Blues": [
+                "#ADD8E6", // LightBlue
+                "#00BFFF", // DeepSkyBlue
+                "#1E90FF", // DodgerBlue
+                "#4169E1", // RoyalBlue
+                "#0000FF", // Blue
+                "#00008B", // DarkBlue
+                "#000080"  // Navy
+            ],
+            "Greens": [
+                "#90EE90", // LightGreen
+                "#32CD32", // LimeGreen
+                "#228B22", // ForestGreen
+                "#008000", // Green
+                "#006400", // DarkGreen
+                "#2E8B57", // SeaGreen
+                "#6B8E23"  // OliveDrab
+            ],
+            "Reds": [
+                "#F08080", // LightCoral
+                "#FA8072", // Salmon
+                "#FF0000", // Red
+                "#DC143C", // Crimson
+                "#8B0000", // DarkRed
+                "#B22222", // Firebrick
+                "#800000"  // Maroon
+            ],
+            "Purples": [
+                "#E6E6FA", // Lavender
+                "#EE82EE", // Violet
+                "#DA70D6", // Orchid
+                "#9370DB", // MediumPurple
+                "#8A2BE2", // BlueViolet
+                "#9400D3", // DarkViolet
+                "#800080"  // Purple
+            ],
+            "Oranges": [
+                "#FF0000", // Pure Red
+                "#FF2300",
+                "#FF4600",
+                "#FF6900",
+                "#FF8C00",
+                "#FFAF00",
+                "#FFD200"  // Strong Orange
+            ],
+            "BluePurple": [
+                "#0078FF",
+                "#1464FF",
+                "#2850FF",
+                "#3C3CFF",
+                "#5028FF",
+                "#6414FF",
+                "#7800FF"
+            ],
+            "Custom": []
+        };
+
+        // Get DOM elements
+        const textInput = document.getElementById('textInput');
+        const colorSetRadios = document.getElementsByName('colorSet');
+        const copyButton = document.getElementById('copyButton');
+        const displayPanel = document.getElementById('displayPanel');
+        const notification = document.getElementById('notification');
+        const customColorsControls = document.getElementById('customColorsControls');
+        const colorPicker = document.getElementById('colorPicker');
+        const addColorBtn = document.getElementById('addColorBtn');
+        const clearColorsBtn = document.getElementById('clearColorsBtn');
+        const customColorsList = document.getElementById('customColorsList');
+
+        // Initialize custom colors
+        let customColors = [];
+
+        // Function to get selected color set
+        function getSelectedColorSet() {
+            for (const radio of colorSetRadios) {
+                if (radio.checked) {
+                    return radio.value;
+                }
+            }
+            return "Rainbow"; // Default
+        }
+
+        // Function to calculate color index
+        function getColorIndex(index, n) {
+            if (n === 0) {
+                return 0;
+            }
+
+            const p = index % (2 * n);
+
+            if (p <= n) {
+                return p;
+            } else {
+                return (2 * n - p);
+            }
+        }
+
+        // Function to create colored label text
+        function createColoredLabel(text, colors) {
+            const container = document.createElement('span');
+            container.className = 'color-label';
+            
+            const charArray = text.split('');
+            
+            for (let i = 0; i < charArray.length; i++) {
+                const colorIndex = getColorIndex(i, colors.length - 1);
+                const char = charArray[i];
+                
+                const charSpan = document.createElement('span');
+                charSpan.className = 'char-span';
+                charSpan.textContent = char;
+                charSpan.style.color = colors[colorIndex];
+                
+                container.appendChild(charSpan);
+            }
+            
+            return container;
+        }
+
+        // Function to update all color labels
+        function updateColorLabels() {
+            const labels = {
+                "Rainbow": document.getElementById('labelRainbow'),
+                "Blues": document.getElementById('labelBlues'),
+                "Greens": document.getElementById('labelGreens'),
+                "Reds": document.getElementById('labelReds'),
+                "Purples": document.getElementById('labelPurples'),
+                "Oranges": document.getElementById('labelOranges'),
+                "BluePurple": document.getElementById('labelBluePurple'),
+                "Custom": document.getElementById('labelCustom')
+            };
+
+            for (const [setName, labelElement] of Object.entries(labels)) {
+                const colors = colorSets[setName];
+                const text = labelElement.textContent || labelElement.innerText;
+                
+                // Clear existing content
+                labelElement.innerHTML = '';
+                
+                // Add colored text
+                const coloredText = createColoredLabel(text, colors);
+                labelElement.appendChild(coloredText);
+            }
+        }
+
+        // Function to refresh the displayed text
+        function refreshText() {
+            displayPanel.innerHTML = '';
+            
+            const text = textInput.value;
+            if (!text) {
+                return;
+            }
+            
+            const selectedSet = getSelectedColorSet();
+            const colors = selectedSet === "Custom" ? customColors : colorSets[selectedSet];
+            
+            if (colors.length === 0) {
+                return;
+            }
+            
+            // Split text into lines based on newlines
+            const lines = text.split('\n');
+            
+            for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+                const line = lines[lineIndex];
+                const charArray = line.split('');
+                
+                let currentLine = document.createElement('div');
+                displayPanel.appendChild(currentLine);
+                
+                for (let i = 0; i < charArray.length; i++) {
+                    const colorIndex = getColorIndex(i, colors.length - 1);
+                    const char = charArray[i];
+                    
+                    // Create a span for each character
+                    const charSpan = document.createElement('span');
+                    charSpan.className = 'char-span';
+                    
+                    // Handle spaces specially to ensure they have width
+                    if (char === ' ') {
+                        charSpan.className += ' space-char';
+                        charSpan.innerHTML = '&nbsp;'; // Regular space but with width
+                    } else {
+                        charSpan.textContent = char;
+                    }
+                    
+                    charSpan.style.color = colors[colorIndex];
+                    
+                    currentLine.appendChild(charSpan);
+                }
+                
+                // Handle line wrapping within each line
+                handleLineWrapping(currentLine);
+            }
+        }
+
+        // Function to handle line wrapping for a single line
+        function handleLineWrapping(lineElement) {
+            const panelWidth = displayPanel.clientWidth - 30; // Account for padding
+            const chars = lineElement.querySelectorAll('.char-span');
+            let currentWidth = 0;
+            let wrapIndex = -1;
+            
+            // Find where to wrap the line
+            for (let i = 0; i < chars.length; i++) {
+                const charWidth = chars[i].offsetWidth;
+                
+                if (currentWidth + charWidth > panelWidth) {
+                    // Try to find the previous space to wrap at
+                    for (let j = i - 1; j >= 0; j--) {
+                        if (chars[j].classList.contains('space-char')) {
+                            wrapIndex = j;
+                            break;
+                        }
+                    }
+                    
+                    // If no space found, wrap at current position
+                    if (wrapIndex === -1) {
+                        wrapIndex = i - 1;
+                    }
+                    break;
+                }
+                
+                currentWidth += charWidth;
+            }
+            
+            // Perform the wrap if needed
+            if (wrapIndex !== -1 && wrapIndex < chars.length - 1) {
+                const newLine = document.createElement('div');
+                const charsToMove = Array.from(chars).slice(wrapIndex + 1);
+                
+                charsToMove.forEach(char => {
+                    lineElement.removeChild(char);
+                    newLine.appendChild(char);
+                });
+                
+                displayPanel.insertBefore(newLine, lineElement.nextSibling);
+                
+                // Recursively handle wrapping for the new line
+                handleLineWrapping(newLine);
+            }
+        }
+
+        // Function to add color to custom set
+        function addCustomColor(color) {
+            customColors.push(color);
+            colorSets.Custom = customColors;
+            updateCustomColorsDisplay();
+            updateColorLabels();
+            refreshText();
+        }
+
+        // Function to remove color from custom set
+        function removeCustomColor(index) {
+            customColors.splice(index, 1);
+            colorSets.Custom = customColors;
+            updateCustomColorsDisplay();
+            updateColorLabels();
+            refreshText();
+        }
+
+        // Function to clear all custom colors
+        function clearCustomColors() {
+            customColors = [];
+            colorSets.Custom = customColors;
+            updateCustomColorsDisplay();
+            updateColorLabels();
+            refreshText();
+        }
+
+        // Function to update custom colors display
+        function updateCustomColorsDisplay() {
+            customColorsList.innerHTML = '';
+            
+            customColors.forEach((color, index) => {
+                const swatch = document.createElement('div');
+                swatch.className = 'color-swatch';
+                swatch.style.backgroundColor = color;
+                swatch.title = `Click to remove ${color}`;
+                
+                swatch.addEventListener('click', () => {
+                    removeCustomColor(index);
+                });
+                
+                customColorsList.appendChild(swatch);
+            });
+        }
+
+        // Function to copy to clipboard
+        function copyToClipboard() {
+            const text = textInput.value;
+            if (!text) {
+                return;
+            }
+            
+            const selectedSet = getSelectedColorSet();
+            const colors = selectedSet === "Custom" ? customColors : colorSets[selectedSet];
+            
+            if (colors.length === 0) {
+                alert("Please add at least one color to the custom set first!");
+                return;
+            }
+            
+            const lines = text.split('\n');
+            let result = '';
+            
+            for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+                const line = lines[lineIndex];
+                const charArray = line.split('');
+                
+                for (let i = 0; i < charArray.length; i++) {
+                    const colorIndex = getColorIndex(i, colors.length - 1);
+                    const char = charArray[i];
+                    const color = colors[colorIndex];
+                    
+                    // Check if the character is not a whitespace
+                    if (char.match(/\S/)) {
+                        // Add the current color before the character
+                        result += `<${color}>${char}`;
+                    } else {
+                        // If it's a whitespace, just add it as-is
+                        result += char;
+                    }
+                }
+                
+                // Add newline character (except for the last line)
+                if (lineIndex < lines.length - 1) {
+                    result += '\n';
+                }
+            }
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(result).then(() => {
+                // Show notification
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy to clipboard. Please try again.');
+            });
+        }
+
+        // Event listeners
+        textInput.addEventListener('input', refreshText);
+        
+        for (const radio of colorSetRadios) {
+            radio.addEventListener('change', function() {
+                if (this.value === "Custom") {
+                    customColorsControls.style.display = 'block';
+                } else {
+                    customColorsControls.style.display = 'none';
+                }
+                refreshText();
+            });
+        }
+        
+        addColorBtn.addEventListener('click', () => {
+            addCustomColor(colorPicker.value);
+        });
+        
+        clearColorsBtn.addEventListener('click', clearCustomColors);
+        
+        copyButton.addEventListener('click', copyToClipboard);
+        
+        // Initialize with default values
+        textInput.focus();
+        updateColorLabels();
+        refreshText();
+        
+        // Handle window resize for proper line wrapping
+        window.addEventListener('resize', refreshText);
+    </script>
+</body>
+</html>
