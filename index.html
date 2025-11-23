@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palmon Survival - Colored Text Generator</title>
-    <link rel="icon" type="image/x-icon" href="./icon.ico">
+    <title>Palmon Survival Utility tools</title>
+    <link rel="icon" type="image/x-icon" href="https://cetinoone.github.io/PalmonSurvival/icon.ico">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,15 +16,114 @@
             align-items: center;
             min-height: 100vh;
         }
+		
+		input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: border-color 0.3s;
+			-moz-appearance:textfield;
+        }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        select {
+            cursor: pointer;
+            background-color: white;
+        }
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+		
+/* Enhanced top navigation with gradient design */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+    padding: 15px 30px;
+    display: flex;
+    gap: 15px;
+    backdrop-filter: blur(10px);
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.navbar a:hover::before {
+    left: 100%;
+}
+
+.navbar a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar a.active {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Container for each page */
+.page {
+    display: none;
+    width: 100%;
+}
+
+.page.active {
+    display: block;
+}
         
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 750px;
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             padding: 30px;
             box-sizing: border-box;
+			margin: auto;
+			margin-top: 80px;
         }
         
         .header {
@@ -52,7 +151,7 @@
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         
         label {
@@ -294,6 +393,159 @@
             color: #555;
             line-height: 1.6;
         }
+		
+		 .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        th.center {
+            text-align: center;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        td {
+            padding: 12px;
+        }
+        
+        td.center {
+            text-align: center;
+        }
+        
+        td.name {
+            font-weight: 600;
+        }
+        
+        .role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .role-badge.tank {
+            background: #4CAF50;
+        }
+        
+        .role-badge.dps {
+            background: #FF9800;
+        }
+        
+        .delete-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 0;
+        }
+        
+        .delete-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+        
+        .empty-state {
+            padding: 30px;
+            text-align: center;
+            color: #999;
+        }
+        
+        .calculate-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .calculate-section button {
+            font-size: 18px;
+            padding: 15px 40px;
+        }
+        
+        .squads-results {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .squads-results h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 22px;
+        }
+        
+        .squads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .squad-card {
+            background: linear-gradient(135deg, #dedcf4 0%, #b7a7c4 100%);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			margin: 10px;
+        }
+        
+        .squad-card h4 {
+            color: #667eea;
+            margin: 0 0 15px 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        
+        .squad-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .squad-card ul li {
+            background: white;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            color: #333;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+		
+		
         
         @media (max-width: 600px) {
             .container {
@@ -317,55 +569,267 @@
                 margin-right: 0;
                 margin-bottom: 8px;
             }
+			
+			 .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+            
+            .squads-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+		
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: border-color 0.3s;
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group label input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+        }
+		
+		.switch-field {
+			display: flex;
+			margin-bottom: 36px;
+			overflow: hidden;
+		}
+
+		.switch-field input {
+			position: absolute !important;
+			clip: rect(0, 0, 0, 0);
+			height: 1px;
+			width: 1px;
+			border: 0;
+			overflow: hidden;
+		}
+		
+		.switch-field label {
+			background-color: #e4e4e4;
+			color: rgba(0, 0, 0, 0.6);
+			font-size: 18px;
+			line-height: 1;
+			text-align: center;
+			padding: 8px 16px;
+			margin-right: -1px;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+			transition: all 0.1s ease-in-out;
+		}
+
+		.switch-field label:hover {
+			cursor: pointer;
+		}
+
+		.switch-field input:checked + label {
+			background-color: #aaa5ea;
+			box-shadow: none;
+		}
+
+		.switch-field label:first-of-type {
+			border-radius: 4px 0 0 4px;
+		}
+
+		.switch-field label:last-of-type {
+			border-radius: 0 4px 4px 0;
+		}
+		
+		.element-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #666;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .element-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .element-btn.water input.elementalClass:checked + label {
+            background: linear-gradient(135deg, #4FC3F7 0%, #0288D1 100%);
+            color: white;
+            border-color: #0288D1;
+            box-shadow: 0 4px 12px rgba(2, 136, 209, 0.4);
+        }
+        
+        .element-btn.active.fire {
+            background: linear-gradient(135deg, #FF7043 0%, #D32F2F 100%);
+            color: white;
+            border-color: #D32F2F;
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+        }
+        
+        .element-btn.active.earth {
+            background: linear-gradient(135deg, #8D6E63 0%, #5D4037 100%);
+            color: white;
+            border-color: #5D4037;
+            box-shadow: 0 4px 12px rgba(93, 64, 55, 0.4);
+        }
+        
+        .element-btn.active.electric {
+            background: linear-gradient(135deg, #FFD54F 0%, #F57C00 100%);
+            color: white;
+            border-color: #F57C00;
+            box-shadow: 0 4px 12px rgba(245, 124, 0, 0.4);
+        }
+        
+        .element-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            margin-left: 5px;
+        }
+        
+        .element-badge.water {
+            background: linear-gradient(135deg, #4FC3F7 0%, #0288D1 100%);
+        }
+        
+        .element-badge.fire {
+            background: linear-gradient(135deg, #FF7043 0%, #D32F2F 100%);
+        }
+        
+        .element-badge.earth {
+            background: linear-gradient(135deg, #8D6E63 0%, #5D4037 100%);
+        }
+        
+        .element-badge.electric {
+            background: linear-gradient(135deg, #FFD54F 0%, #F57C00 100%);
         }
     </style>
 </head>
 <body>
+<!-- ========================================================= -->
+<!--                     TOP NAVIGATION BAR                     -->
+<!-- ========================================================= -->
+<div class="navbar">
+    <a onclick="showPage('generatorPage', this)">Colored Text Generator</a>
+    <a class="active" onclick="showPage('squadPage', this)">Squad Power Calculator</a>
+</div>
+
+<!-- ========================================================= -->
+<!--                PAGE 1: TEXT GENERATOR (EXISTING)           -->
+<!-- ========================================================= -->
+<div id="generatorPage" class="page">
     <div class="container">
+
+        <!-- ******** YOUR ORIGINAL PAGE CONTENT STARTS HERE ******** -->
+        <!-- (Everything from your original file stays unchanged.) -->
+
         <div class="header">
-            <h1>Palmon Survival<br/>Colored Text Generator</h1>
+            <h1>Palmon Survival<br>Colored Text Generator<br>(requires additional hacks)</h1>
             <div class="author">by Cetino aka Heineman</div>
         </div>
         
         <div class="form-group">
             <label for="textInput">Enter your text:</label>
-            <textarea id="textInput" placeholder="Type your text here... (Supports multiple lines)"></textarea>
+            <textarea id="textInput" placeholder="Type your text here... (Supports multiple lines)" data-lt-tmp-id="lt-200374" spellcheck="false" data-gramm="false"></textarea>
+        </div>
+		
+        <div class="form-group">
+            <label for="sizeSelect">Text Size:</label>
+            <select id="sizeSelect">
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+                <option value="20">20</option>
+                <option value="24">24</option>
+                <option value="28">28</option>
+                <option value="32" selected>32 (Default)</option>
+                <option value="36">36</option>
+                <option value="40">40</option>
+                <option value="48">48</option>
+                <option value="56">56</option>
+                <option value="60">60</option>
+				<option value="68">68</option>
+				<option value="76">76</option>
+				<option value="80">80</option>
+				<option value="88">88</option>
+				<option value="96">96</option>
+				<option value="100">100</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="waveCheckbox">
+                Wave Effect (La Ola)
+            </label>
         </div>
         
         <fieldset class="color-set-group">
             <legend>Color Sets</legend>
             <div class="color-options">
                 <div class="color-option">
-                    <input type="radio" id="radioRainbow" name="colorSet" value="Rainbow" checked>
-                    <label for="radioRainbow" class="color-label" id="labelRainbow">Rainbow</label>
+                    <input type="radio" id="radioRainbow" name="colorSet" value="Rainbow" checked="checked">
+                    <label for="radioRainbow" class="color-label" id="labelRainbow"><span class="color-label"><span class="char-span" style="color: rgb(255, 0, 0);">R</span><span class="char-span" style="color: rgb(255, 69, 0);">a</span><span class="char-span" style="color: rgb(255, 140, 0);">i</span><span class="char-span" style="color: rgb(255, 165, 0);">n</span><span class="char-span" style="color: rgb(255, 215, 0);">b</span><span class="char-span" style="color: rgb(255, 255, 0);">o</span><span class="char-span" style="color: rgb(154, 205, 50);">w</span></span></label>
                 </div>
                 <div class="color-option">
                     <input type="radio" id="radioBlues" name="colorSet" value="Blues">
-                    <label for="radioBlues" class="color-label" id="labelBlues">Blues</label>
+                    <label for="radioBlues" class="color-label" id="labelBlues"><span class="color-label"><span class="char-span" style="color: rgb(0, 191, 255);">B</span><span class="char-span" style="color: rgb(30, 144, 255);">l</span><span class="char-span" style="color: rgb(65, 105, 225);">u</span><span class="char-span" style="color: rgb(0, 0, 255);">e</span><span class="char-span" style="color: rgb(0, 0, 205);">s</span></span></label>
                 </div>
                 <div class="color-option">
                     <input type="radio" id="radioGreens" name="colorSet" value="Greens">
-                    <label for="radioGreens" class="color-label" id="labelGreens">Greens</label>
+                    <label for="radioGreens" class="color-label" id="labelGreens"><span class="color-label"><span class="char-span" style="color: rgb(50, 205, 50);">G</span><span class="char-span" style="color: rgb(0, 255, 0);">r</span><span class="char-span" style="color: rgb(0, 250, 154);">e</span><span class="char-span" style="color: rgb(0, 255, 127);">e</span><span class="char-span" style="color: rgb(60, 179, 113);">n</span><span class="char-span" style="color: rgb(46, 139, 87);">s</span></span></label>
                 </div>
                 <div class="color-option">
                     <input type="radio" id="radioReds" name="colorSet" value="Reds">
-                    <label for="radioReds" class="color-label" id="labelReds">Reds</label>
+                    <label for="radioReds" class="color-label" id="labelReds"><span class="color-label"><span class="char-span" style="color: rgb(255, 107, 107);">R</span><span class="char-span" style="color: rgb(255, 71, 87);">e</span><span class="char-span" style="color: rgb(255, 56, 56);">d</span><span class="char-span" style="color: rgb(255, 0, 0);">s</span></span></label>
                 </div>
                 <div class="color-option">
                     <input type="radio" id="radioPurples" name="colorSet" value="Purples">
-                    <label for="radioPurples" class="color-label" id="labelPurples">Purples</label>
+                    <label for="radioPurples" class="color-label" id="labelPurples"><span class="color-label"><span class="char-span" style="color: rgb(238, 130, 238);">P</span><span class="char-span" style="color: rgb(218, 112, 214);">u</span><span class="char-span" style="color: rgb(186, 85, 211);">r</span><span class="char-span" style="color: rgb(147, 112, 219);">p</span><span class="char-span" style="color: rgb(138, 43, 226);">l</span><span class="char-span" style="color: rgb(148, 0, 211);">e</span><span class="char-span" style="color: rgb(139, 0, 139);">s</span></span></label>
                 </div>
                 <div class="color-option">
                     <input type="radio" id="radioOranges" name="colorSet" value="Oranges">
-                    <label for="radioOranges" class="color-label" id="labelOranges">Oranges</label>
+                    <label for="radioOranges" class="color-label" id="labelOranges"><span class="color-label"><span class="char-span" style="color: rgb(255, 69, 0);">O</span><span class="char-span" style="color: rgb(255, 87, 34);">r</span><span class="char-span" style="color: rgb(255, 99, 71);">a</span><span class="char-span" style="color: rgb(255, 112, 67);">n</span><span class="char-span" style="color: rgb(255, 140, 0);">g</span><span class="char-span" style="color: rgb(255, 165, 0);">e</span><span class="char-span" style="color: rgb(255, 179, 71);">s</span></span></label>
                 </div>
                 <div class="color-option">
                     <input type="radio" id="radioBluePurple" name="colorSet" value="BluePurple">
-                    <label for="radioBluePurple" class="color-label" id="labelBluePurple">Blue/Purple</label>
+                    <label for="radioBluePurple" class="color-label" id="labelBluePurple"><span class="color-label"><span class="char-span" style="color: rgb(0, 120, 255);">B</span><span class="char-span" style="color: rgb(20, 100, 255);">l</span><span class="char-span" style="color: rgb(40, 80, 255);">u</span><span class="char-span" style="color: rgb(60, 60, 255);">e</span><span class="char-span" style="color: rgb(80, 40, 255);">/</span><span class="char-span" style="color: rgb(100, 20, 255);">P</span><span class="char-span" style="color: rgb(120, 0, 255);">u</span><span class="char-span" style="color: rgb(100, 20, 255);">r</span><span class="char-span" style="color: rgb(80, 40, 255);">p</span><span class="char-span" style="color: rgb(60, 60, 255);">l</span><span class="char-span" style="color: rgb(40, 80, 255);">e</span></span></label>
                 </div>
                 <div class="color-option">
                     <input type="radio" id="radioCustom" name="colorSet" value="Custom">
-                    <label for="radioCustom" class="color-label" id="labelCustom">Custom</label>
+                    <label for="radioCustom" class="color-label" id="labelCustom"><span class="color-label"><span class="char-span">C</span><span class="char-span">u</span><span class="char-span">s</span><span class="char-span">t</span><span class="char-span">o</span><span class="char-span">m</span></span></label>
                 </div>
             </div>
             
@@ -386,20 +850,24 @@
         <div class="usage-section">
             <h3>How to Use</h3>
             <div class="usage-steps">
-                <div class="usage-step">
+			    <div class="usage-step">
                     <div class="step-number">1</div>
-                    <div class="step-text">Type or paste your message in the text field above</div>
+                    <div class="step-text">Take actions to prevent the game from replacing "&lt;" with "&lt;\"</div>
                 </div>
                 <div class="usage-step">
                     <div class="step-number">2</div>
-                    <div class="step-text">Select a color set from the options (or create your own custom palette)</div>
+                    <div class="step-text">Type or paste your message in the text field above</div>
                 </div>
                 <div class="usage-step">
                     <div class="step-number">3</div>
-                    <div class="step-text">Click "Copy to clipboard" to copy the formatted text</div>
+                    <div class="step-text">Select a color set from the options (or create your own custom palette)</div>
                 </div>
                 <div class="usage-step">
                     <div class="step-number">4</div>
+                    <div class="step-text">Click "Copy to clipboard" to copy the formatted text</div>
+                </div>
+                <div class="usage-step">
+                    <div class="step-number">5</div>
                     <div class="step-text">Paste directly into Palmon Survival chat to display your colorful message</div>
                 </div>
             </div>
@@ -408,7 +876,125 @@
     
     <div class="notification" id="notification">Copied to clipboard!</div>
 
-    <script>
+    </div>
+
+<!-- ========================================================= -->
+<!--      PAGE 2: SQUAD POWER CALCULATOR (EMPTY TEMPLATE)       -->
+<!-- ========================================================= -->
+<div id="squadPage" class="page active">
+    <div class="container">
+        <div class="header">
+            <h1>Squad Power Calculator</h1>
+            <div class="author">by Cetino aka Heineman</div>
+        </div>
+
+ <div class="usage-section">
+            <h3>Add Your Pals</h3>
+            <div class="form-group">
+                <label for="palName">Pal Name:</label>
+                <input type="text" id="palName" placeholder="Enter pal name">
+            </div>
+            <div class="stats-grid">
+                <div class="form-group">
+                    <label for="palAttack">Attack:</label>
+                    <input type="number" id="palAttack" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="palDefense">Defense:</label>
+                    <input type="number" id="palDefense" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="palHP">HP:</label>
+                    <input type="number" id="palHP" placeholder="0" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="palPower">Power:</label>
+                    <input type="number" id="palPower" placeholder="0" min="0">
+                </div>
+            </div>
+				<div class="form-group">			
+					<label for="roles">Role:</label>
+					<div id="roles" class="switch-field">
+						<input type="radio" id="radio-tank" name="pal_role" value="Tank"/>
+						<label for="radio-tank">Tank</label>
+						<input type="radio" id="radio-dps" name="pal_role" value="DPS" checked/>
+						<label for="radio-dps">DPS</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Element Type:</label>
+					<div>
+						<input type="radio" name="pal_element" id="radio-water" class="switch-field" data-element="Water" id="btnWater" checked/><label for="radio-water" class="element-btn water">💧 Water</label>
+						<input type="radio" name="pal_element" id="radio-fire" class="element-btn fire" data-element="Fire" id="btnFire"/><label for="radio-fire">🔥 Fire</label>
+						<input type="radio" name="pal_element" id="radio-earth" class="element-btn earth" data-element="Earth" id="btnEarth"/><label for="radio-earth">🌍 Earth</label>
+						<input type="radio" name="pal_element" id="radio-electric" class="element-btn electric" data-element="Electric" id="btnElectric"/><label for="radio-electric">⚡ Electric</label>
+					</div>
+				</div>
+            <button id="addPalBtn">Add Pal</button>
+        </div>
+
+        <div class="table-wrapper">
+            <h3 style="color: #333; margin-bottom: 15px;">Your Pals Collection</h3>
+            <table id="palsTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th class="center">Attack</th>
+                        <th class="center">Defense</th>
+                        <th class="center">HP</th>
+                        <th class="center">Power</th>
+                        <th class="center">Role</th>
+                        <th class="center">Element</th>
+                        <th class="center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="palsTableBody">
+                    <tr>
+                        <td colspan="8" class="empty-state">No pals added yet. Add your first pal above!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="calculate-section">
+            <button id="calculateSquadsBtn">Calculate Random Squads</button>
+        </div>
+
+        <div class="squads-results" id="squadsResults">
+            <h3>Generated Squads</h3>
+            <div class="squads-grid">
+                <div class="squad-card">
+                    <h4>Best squad by attack</h4>
+                    <ul id="squad1List"></ul>
+                </div>
+                <div class="squad-card">
+                    <h4>Best squad by defense</h4>
+                    <ul id="squad2List"></ul>
+                </div>
+                <div class="squad-card">
+                    <h4>Best squad by power</h4>
+                    <ul id="squad3List"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================= -->
+<!--                    PAGE SWITCH SCRIPT                       -->
+<!-- ========================================================= -->
+<script>
+function showPage(pageId, linkElement) {
+    // hide all pages
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+
+    // show selected
+    document.getElementById(pageId).classList.add("active");
+
+    // update nav highlight
+    document.querySelectorAll(".navbar a").forEach(a => a.classList.remove("active"));
+    linkElement.classList.add("active");
+}
         // Color set definitions
         const colorSets = {
             "Rainbow": [
@@ -430,62 +1016,64 @@
                 "#EE82EE", // Violet
                 "#FF1493"  // Deep Pink
             ],
-            "Blues": [
-                "#00BFFF", // DeepSkyBlue
-                "#1E90FF", // DodgerBlue
-                "#4169E1", // RoyalBlue
-                "#0000FF", // Blue
-                "#0000CD", // MediumBlue
-                "#00008B", // DarkBlue
-                "#000080", // Navy
-                "#191970", // MidnightBlue
-                "#0047AB", // Cobalt
-                "#4682B4", // SteelBlue
-                "#5F9EA0", // CadetBlue
-                "#008B8B"  // DarkCyan
-            ],
-            "Greens": [
-                "#32CD32", // LimeGreen
-                "#00FF00", // Lime
-                "#00FA9A", // MediumSpringGreen
-                "#00FF7F", // SpringGreen
-                "#3CB371", // MediumSeaGreen
-                "#2E8B57", // SeaGreen
-                "#228B22", // ForestGreen
-                "#008000", // Green
-                "#006400", // DarkGreen
-                "#556B2F", // DarkOliveGreen
-                "#6B8E23", // OliveDrab
-                "#808000"  // Olive
-            ],
-            "Reds": [
-                "#FF6B6B", // Light Red
-                "#FF4757", // Coral Red
-                "#FF3838", // Bright Red
-                "#FF0000", // Red
-                "#EE0000", // Pure Red
-                "#DC143C", // Crimson
-                "#C41E3A", // Cardinal
-                "#B22222", // Firebrick
-                "#A52A2A", // Brown Red
-                "#8B0000", // DarkRed
-                "#800000", // Maroon
-                "#660000"  // Deep Maroon
-            ],
-            "Purples": [
-                "#EE82EE", // Violet
-                "#DA70D6", // Orchid
-                "#BA55D3", // MediumOrchid
-                "#9370DB", // MediumPurple
-                "#8A2BE2", // BlueViolet
-                "#9400D3", // DarkViolet
-                "#8B008B", // DarkMagenta
-                "#800080", // Purple
-                "#6A0DAD", // Royal Purple
-                "#5D3FD3", // Iris
-                "#4B0082", // Indigo
-                "#3D0066"  // Deep Purple
-            ],
+"Blues": [
+"#4A90E2",
+"#3579D6",
+"#2467C9",
+"#1657BC",
+"#0D47A1",
+"#0B3E8A",
+"#093676",
+"#072D62",
+"#062652",
+"#051F42",
+"#041A36",
+"#031428"
+],
+"Greens": [
+"#4CAF50",
+"#43A047",
+"#388E3C",
+"#2E7D32",
+"#276C2B",
+"#205C24",
+"#1A4D1E",
+"#144018",
+"#0F3413",
+"#0B2A0F",
+"#081F0B",
+"#051706"
+],
+Reds:
+[
+"#FF6F61",
+"#FF574A",
+"#F44336",
+"#E53935",
+"#D32F2F",
+"#C62828",
+"#B71C1C",
+"#A11919",
+"#8B1616",
+"#751212",
+"#5E0E0E",
+"#470A0A"
+],
+Purples:
+[
+"#DDA0DD",
+"#C586E8",
+"#B06FE3",
+"#9B59D0",
+"#8E44AD",
+"#7D3C98",
+"#6C3483",
+"#5B2C6F",
+"#4A245A",
+"#3A1D46",
+"#2A1633",
+"#1B0E20"
+],
             "Oranges": [
                 "#FF4500", // OrangeRed
                 "#FF5722", // Deep Orange
@@ -522,6 +1110,8 @@
         const addColorBtn = document.getElementById('addColorBtn');
         const clearColorsBtn = document.getElementById('clearColorsBtn');
         const customColorsList = document.getElementById('customColorsList');
+        const sizeSelect = document.getElementById('sizeSelect');
+        const waveCheckbox = document.getElementById('waveCheckbox');
 
         // Initialize custom colors
         let customColors = [];
@@ -596,55 +1186,74 @@
                 labelElement.appendChild(coloredText);
             }
         }
+		
+// Function to calculate wave size for a character at position i
+function getWaveSize(index, baseSize, waveAmplitude = 10) {
+    // Create a sine wave pattern
+    const waveFrequency = 0.3; // Adjust this to make waves wider or narrower
+    const sizeVariation = Math.sin(index * waveFrequency) * waveAmplitude;
+    return Math.round(baseSize + sizeVariation);
+}
 
-        // Function to refresh the displayed text
-        function refreshText() {
-            displayPanel.innerHTML = '';
+// Function to refresh the displayed text
+function refreshText() {
+    displayPanel.innerHTML = '';
+    
+    const text = textInput.value;
+    if (!text) {
+        return;
+    }
+    
+    const selectedSet = getSelectedColorSet();
+    const colors = selectedSet === "Custom" ? customColors : colorSets[selectedSet];
+    
+    if (colors.length === 0) {
+        return;
+    }
+    
+    const selectedSize = parseInt(sizeSelect.value);
+    const isWaveMode = waveCheckbox.checked;
+    
+    const lines = text.split('\n');
+    
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+        const line = lines[lineIndex];
+        const charArray = line.split('');
+        
+        let currentLine = document.createElement('div');
+        displayPanel.appendChild(currentLine);
+        
+        for (let i = 0; i < charArray.length; i++) {
+            const colorIndex = getColorIndex(i, colors.length - 1);
+            const char = charArray[i];
             
-            const text = textInput.value;
-            if (!text) {
-                return;
+            const charSpan = document.createElement('span');
+            charSpan.className = 'char-span';
+            
+            if (char === ' ') {
+                charSpan.className += ' space-char';
+                charSpan.innerHTML = '&nbsp;';
+            } else {
+                charSpan.textContent = char;
             }
             
-            const selectedSet = getSelectedColorSet();
-            const colors = selectedSet === "Custom" ? customColors : colorSets[selectedSet];
+            charSpan.style.color = colors[colorIndex];
             
-            if (colors.length === 0) {
-                return;
+            // Apply size styling for preview
+			let factor = 0.7;
+            if (isWaveMode) {
+                const waveSize = getWaveSize(i, selectedSize);
+                charSpan.style.fontSize = waveSize * factor + 'px';
+            } else {
+                charSpan.style.fontSize = selectedSize * factor + 'px';
             }
             
-            const lines = text.split('\n');
-            
-            for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
-                const line = lines[lineIndex];
-                const charArray = line.split('');
-                
-                let currentLine = document.createElement('div');
-                displayPanel.appendChild(currentLine);
-                
-                for (let i = 0; i < charArray.length; i++) {
-                    const colorIndex = getColorIndex(i, colors.length - 1);
-                    const char = charArray[i];
-                    
-                    const charSpan = document.createElement('span');
-                    charSpan.className = 'char-span';
-                    
-                    if (char === ' ') {
-                        charSpan.className += ' space-char';
-                        charSpan.innerHTML = '&nbsp;';
-                    } else {
-                        charSpan.textContent = char;
-                    }
-                    
-                    charSpan.style.color = colors[colorIndex];
-                    
-                    currentLine.appendChild(charSpan);
-                }
-                
-                handleLineWrapping(currentLine);
-            }
+            currentLine.appendChild(charSpan);
         }
-
+        
+        handleLineWrapping(currentLine);
+    }
+}
         // Function to handle line wrapping for a single line
         function handleLineWrapping(lineElement) {
             const panelWidth = displayPanel.clientWidth - 30;
@@ -733,56 +1342,74 @@
         }
 
         // Function to copy to clipboard
-        function copyToClipboard() {
-            const text = textInput.value;
-            if (!text) {
-                return;
-            }
+function copyToClipboard() {
+    const text = textInput.value;
+    if (!text) {
+        return;
+    }
+    
+    const selectedSet = getSelectedColorSet();
+    const colors = selectedSet === "Custom" ? customColors : colorSets[selectedSet];
+    
+    if (colors.length === 0) {
+        alert("Please add at least one color to the custom set first!");
+        return;
+    }
+    
+    const selectedSize = parseInt(sizeSelect.value);
+    const actualSize = selectedSize;
+    const isWaveMode = waveCheckbox.checked;
+    
+    const lines = text.split('\n');
+    let result = '';
+    
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+        const line = lines[lineIndex];
+        const charArray = line.split('');
+        
+        for (let i = 0; i < charArray.length; i++) {
+            const colorIndex = getColorIndex(i, colors.length - 1);
+            const char = charArray[i];
+            const color = colors[colorIndex];
             
-            const selectedSet = getSelectedColorSet();
-            const colors = selectedSet === "Custom" ? customColors : colorSets[selectedSet];
-            
-            if (colors.length === 0) {
-                alert("Please add at least one color to the custom set first!");
-                return;
-            }
-            
-            const lines = text.split('\n');
-            let result = '';
-            
-            for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
-                const line = lines[lineIndex];
-                const charArray = line.split('');
-                
-                for (let i = 0; i < charArray.length; i++) {
-                    const colorIndex = getColorIndex(i, colors.length - 1);
-                    const char = charArray[i];
-                    const color = colors[colorIndex];
-                    
-                    if (char.match(/\S/)) {
-                        result += `<${color}>${char}`;
-                    } else {
-                        result += char;
-                    }
+            if (char.match(/\S/)) {
+                if (isWaveMode) {
+                    // Wave mode: add size tag for each character
+                    const waveSize = getWaveSize(i, actualSize);
+                    result += `<size=${waveSize}><${color}>${char}</size>`;
+                } else {
+                    // Normal mode: just color
+                    result += `<${color}>${char}`;
                 }
-                
-                if (lineIndex < lines.length - 1) {
-                    result += '\n';
-                }
+            } else {
+                result += char;
             }
-            
-            navigator.clipboard.writeText(result).then(() => {
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-                alert('Failed to copy to clipboard. Please try again.');
-            });
         }
+        
+        if (lineIndex < lines.length - 1) {
+            result += '\n';
+        }
+    }
+    
+    // If not in wave mode but size is selected, wrap entire text in size tags
+    if (!isWaveMode && selectedSize > 6) {
+        result = `<size=${actualSize}>${result}</size>`;
+    }
+    
+    navigator.clipboard.writeText(result).then(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy to clipboard. Please try again.');
+    });
+}
 
         // Event listeners
+        sizeSelect.addEventListener('change', refreshText);
+        waveCheckbox.addEventListener('change', refreshText);
         textInput.addEventListener('input', refreshText);
         
         for (const radio of colorSetRadios) {
@@ -810,10 +1437,170 @@
         refreshText();
         
         window.addEventListener('resize', refreshText);
+		
+		// Squad Calculator functionality
+        const STORAGE_KEY = 'palmonPals';
+
+        // Load pals from localStorage
+        function loadPals() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        // Save pals to localStorage
+        function savePals(pals) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(pals));
+        }
+		
+		  // Get element icon
+        function getElementIcon(element) {
+            const icons = {
+                'Water': '💧',
+                'Fire': '🔥',
+                'Earth': '🌍',
+                'Electric': '⚡'
+            };
+            return icons[element] || '';
+        }
+
+// Render pals table
+        function renderPalsTable() {
+            const pals = loadPals();
+            const tbody = document.getElementById('palsTableBody');
+            
+            if (pals.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="empty-state">No pals added yet. Add your first pal above!</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = '';
+            
+            pals.forEach((pal, index) => {
+                const row = document.createElement('tr');
+                const elementClass = pal.element.toLowerCase();
+                row.innerHTML = `
+                    <td class="name">${pal.name}</td>
+                    <td class="center">${pal.attack}</td>
+                    <td class="center">${pal.defense}</td>
+                    <td class="center">${pal.hp}</td>
+                    <td class="center">${pal.power}</td>
+                    <td class="center"><span class="role-badge ${pal.role.toLowerCase()}">${pal.role}</span></td>
+                    <td class="center"><span class="element-badge ${elementClass}">${getElementIcon(pal.element)} ${pal.element}</span></td>
+                    <td class="center">
+                        <button class="delete-btn" onclick="deletePal(${index})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Add pal
+        function addPal() {
+            const name = document.getElementById('palName').value.trim();
+            const attack = parseInt(document.getElementById('palAttack').value) || 0;
+            const defense = parseInt(document.getElementById('palDefense').value) || 0;
+            const hp = parseInt(document.getElementById('palHP').value) || 0;
+            const power = parseInt(document.getElementById('palPower').value) || 0;
+            const role = document.querySelector('input[name="pal_role"]:checked').value;
+            
+            if (!name) {
+                alert('Please enter a pal name!');
+                return;
+            }
+            
+            const pals = loadPals();
+            pals.push({ name, attack, defense, hp, power, role });
+            savePals(pals);
+            
+            // Clear form
+            document.getElementById('palName').value = '';
+            document.getElementById('palAttack').value = '';
+            document.getElementById('palDefense').value = '';
+            document.getElementById('palHP').value = '';
+            document.getElementById('palPower').value = '';
+			document.getElementById('radio-tank').checked = false;
+            document.getElementById('radio-dps').checked = true;
+            
+            renderPalsTable();
+            
+            // Focus back to name field for quick entry
+            document.getElementById('palName').focus();
+        }
+
+        // Delete pal
+        function deletePal(index) {
+            if (confirm('Are you sure you want to delete this pal?')) {
+                const pals = loadPals();
+                pals.splice(index, 1);
+                savePals(pals);
+                renderPalsTable();
+            }
+        }
+
+        // Shuffle array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Calculate random squads
+        function calculateSquads() {
+            const pals = loadPals();
+            
+            if (pals.length < 7) {
+                alert('You need at least 7 pals to generate squads!');
+                return;
+            }
+            
+            // Generate 3 squads of 7 random pals each
+            const squads = [];
+            for (let i = 0; i < 3; i++) {
+                const shuffled = shuffleArray(pals);
+                const squad = shuffled.slice(0, 7);
+                squads.push(squad);
+            }
+            
+            // Display squads
+            for (let i = 0; i < 3; i++) {
+                const listElement = document.getElementById(`squad${i + 1}List`);
+                listElement.innerHTML = '';
+                
+                squads[i].forEach(pal => {
+                    const li = document.createElement('li');
+                    li.textContent = pal.name;
+                    listElement.appendChild(li);
+                });
+            }
+            
+            document.getElementById('squadsResults').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('squadsResults').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Initialize squad calculator when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPalsTable();
+            
+            document.getElementById('addPalBtn').addEventListener('click', addPal);
+            document.getElementById('calculateSquadsBtn').addEventListener('click', calculateSquads);
+            
+            // Allow Enter key to add pal
+            ['palName', 'palAttack', 'palDefense', 'palHP', 'palPower'].forEach(id => {
+                document.getElementById(id).addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        addPal();
+                    }
+                });
+            });
+            
+            // Focus on name field on load
+            document.getElementById('palName').focus();
+        });
     </script>
-</body>
+  </body>
 </html>
-
-
-
-
