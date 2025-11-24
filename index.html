@@ -432,7 +432,7 @@
         }
         
         td {
-            padding: 12px;
+            padding: 4px;
         }
         
         td.center {
@@ -617,7 +617,7 @@
 		.switch-field {
 			display: flex;
 			margin-bottom: 36px;
-			overflow: hidden;
+			user-select: none;
 		}
 
 		.switch-field input {
@@ -649,6 +649,7 @@
 		.switch-field input:checked + label {
 			background-color: #aaa5ea;
 			box-shadow: none;
+			color: white;
 		}
 
 		.switch-field label:first-of-type {
@@ -913,10 +914,10 @@
 				<div class="form-group">			
 					<label for="roles">Role:</label>
 					<div id="roles" class="switch-field">
-						<input type="radio" id="radio-tank" name="pal_role" value="Tank"/>
-						<label for="radio-tank">🛡️ Tank</label>
 						<input type="radio" id="radio-dps" name="pal_role" value="DPS" checked/>
 						<label for="radio-dps">⚔️ DPS</label>
+						<input type="radio" id="radio-tank" name="pal_role" value="Tank"/>
+						<label for="radio-tank">🛡️ Tank</label>
 					</div>
 				</div>
 				<div class="form-group">
@@ -1521,6 +1522,7 @@ function copyToClipboard() {
             const pals = loadPals();
             pals.push({ name, attack, defense, hp, power, role, element });
             savePals(pals);
+			renderPalsTable();
             
             // Clear form
             document.getElementById('palName').value = '';
