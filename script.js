@@ -647,7 +647,8 @@ async function calculateSquads() {
 		const squads = findOptimalSquad(pals);
 		const duration = performance.now() - start;		
 		gtag('event', 'calculation_duration_ms', {
-		  value: duration
+			event_category: 'squad_calculator',
+			value: duration
 		});
         
         
