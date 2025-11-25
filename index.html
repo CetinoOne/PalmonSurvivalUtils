@@ -6,7 +6,6 @@
     <title>Palmon Survival Utility tools</title>
     <link rel="icon" type="image/x-icon" href="icon.ico">
     <link rel="stylesheet" href="styles.css">
-	<script src="script.js"></script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -151,9 +150,13 @@
                 <h1>Squad Power Calculator</h1>
                 <div class="author">by Cetino aka Heineman</div>
             </div>
-
+			
+			<div>
             <div class="usage-section">
                 <h3>Add Your Pals</h3>
+				<div class="tip-box">
+					<strong>Tip:</strong> Your entered Pal stats are automatically saved in your browser, so you won’t lose your data even if you refresh or come back later.<br> Before submitting any stats, make sure to remove all equipment from your Pal. This ensures the recorded values reflect the Pal’s true base stats, making comparisons accurate and reliable.
+				</div>
                 <div class="form-group">
                     <label for="palName">Pal Name:</label>
                     <input type="text" id="palName" placeholder="Enter pal name">
@@ -233,6 +236,17 @@
 
             <div class="squads-results" id="squadsResults">
                 <h3>Optimal Squad Formations</h3>
+				<div class="collapsible-tip">
+					<button class="collapsible-toggle">Show Calculation Details ▼</button>
+					<div class="collapsible-content">
+						<p><strong>How squads are calculated:</strong></p>
+						<p>Each squad consists of 7 of your entered pals and is evaluated under four criteria:
+							highest total Attack, highest total Defense, highest total Power, and the best overall sum of all stats.</p>
+						<p>All pal stats are added together. Role bonuses apply — Tanks gain +20% Defense, DPS gain +30% Attack.</p>
+						<p>Element synergy is also included: having 3 to 7 pals of the same element grants a bonus between 5% and 30% to 
+							Attack, Defense, and HP for the entire squad.</p>
+					</div>
+				</div>
                 <div class="squads-grid">
                     <div class="squad-card">
                         <h4>⚔️ Best Attack Squad</h4>
@@ -258,5 +272,17 @@
             </div>
         </div>
     </div>   
+	<div id="modalOverlay" class="modal-overlay" style="display:none;">
+		<div class="modal-window">
+			<h3 id="modalTitle">Confirm</h3>
+			<p id="modalMessage"></p>
+
+			<div class="modal-buttons">
+				<button id="modalCancel" class="modal-btn cancel">Cancel</button>
+				<button id="modalConfirm" class="modal-btn confirm">OK</button>
+			</div>
+		</div>
+	</div>
+	<script src="script.js"></script>
 </body>
 </html>
