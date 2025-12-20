@@ -43,7 +43,7 @@ input::-webkit-inner-spin-button {
 
 @font-face {
   font-family: 'UIFont';
-  src: url('UIFontR.ttf') format('ttf');
+  src: url('UIFontR.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
