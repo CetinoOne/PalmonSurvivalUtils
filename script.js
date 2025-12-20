@@ -119,8 +119,8 @@ function updateColorLabels() {
 }
 
 // Calculate wave size for a character
-function getWaveSize(index, baseSize, waveAmplitude = 10) {
-    const waveFrequency = 0.3;
+function getWaveSize(index, baseSize, waveAmplitude = 13) {
+    const waveFrequency = 0.1;
     const sizeVariation = Math.sin(index * waveFrequency) * waveAmplitude;
     return Math.round(baseSize + sizeVariation);
 }
@@ -161,7 +161,7 @@ function refreshText() {
             
             charSpan.style.color = colors[colorIndex];
             
-            let factor = 0.7;
+            let factor = 0.5;
             if (isWaveMode) {
                 const waveSize = getWaveSize(i, selectedSize);
                 charSpan.style.fontSize = waveSize * factor + 'px';
